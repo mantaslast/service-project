@@ -7,7 +7,7 @@ db.authenticate()
     // eslint-disable-next-line no-console
     console.log('Connection has been established successfully.');
   })
-  .catch((err) => {
+  .catch((err: Error) => {
     // eslint-disable-next-line no-console
     console.error('Unable to connect to the database:', err);
   });
