@@ -1,13 +1,13 @@
 import express, { Application, Request, Response } from 'express';
 import { PORT } from '@/config';
-import db from './db';
+import db from '@/db';
 
 db.authenticate()
   .then(() => {
     // eslint-disable-next-line no-console
     console.log('Connection has been established successfully.');
   })
-  .catch((err) => {
+  .catch((err: Error) => {
     // eslint-disable-next-line no-console
     console.error('Unable to connect to the database:', err);
   });
