@@ -13,7 +13,7 @@ const sequelize = new Sequelize(
   DB_PASSWORD ?? 'test',
   {
     host: DB_HOST,
-    dialect: DB_DIALECT as Dialect,
+    dialect: (DB_DIALECT as Dialect) || 'postgres',
     pool: {
       max: 5,
       min: 0,
