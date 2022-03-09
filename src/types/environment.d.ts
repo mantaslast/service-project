@@ -1,5 +1,3 @@
-import { Dialect } from 'sequelize/types';
-
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
@@ -9,7 +7,6 @@ declare global {
       DB_PASSWORD: string;
       DB_NAME: string;
       DB_HOST: string;
-      DB_DIALECT: Dialect;
     }
   }
 }
