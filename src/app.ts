@@ -1,21 +1,39 @@
-import express, { Application, Request, Response } from 'express';
-import setupDatabase from '@/config/db';
+import express from 'express';
+import xss from 'xss-clean';
+import helmet from 'helmet';
+import expressPinoLogger from 'express-pino-logger';
+import routers from '@/routes';
+import logger from '@/utils/logger';
 
-const app: Application = express();
+const app = express();
 
-const main = async () => {
-  /**
-   * Setup database
-   */
-  await setupDatabase();
-  app.get('/', (req: Request, res: Response) => {
-    res.send('Hello world');
-  });
+/**
+ * Request body parsing setup
+ */
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-  app.listen(process.env.PORT, () => {
-    // eslint-disable-next-line no-console
-    console.log(`Server started on port ${process.env.PORT}`);
-  });
-};
+/**
+ * Security setup
+ */
+app.use(xss());
+app.use(helmet());
 
-main();
+/**
+ * Logging setup
+ */
+app.use(expressPinoLogger({ logger }));
+
+/**
+ * Setup routes
+ */
+app.use(...routers);
+
+/**
+ * Not found page
+ */
+app.get('*', (req, res) => {
+  res.status(404).send('Invalid URL');
+});
+
+export default app;
