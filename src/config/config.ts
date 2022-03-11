@@ -8,6 +8,7 @@ nconf.defaults({
 
 nconf.required([
   'PORT',
+  'DB_TYPE',
   'DB_USERNAME',
   'DB_PASSWORD',
   'DB_HOST',
@@ -21,6 +22,7 @@ const config = {
     port: nconf.get('PORT')
   },
   database: {
+    type: nconf.get('DB_TYPE'),
     username: nconf.get('DB_USERNAME'),
     password: nconf.get('DB_PASSWORD'),
     host: nconf.get('DB_HOST'),

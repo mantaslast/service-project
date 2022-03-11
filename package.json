@@ -1,7 +1,7 @@
 {
   "name": "Self_Service_API_project",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "build/index.js",
   "license": "MIT",
   "scripts": {
     "start": "node -r ts-node/register/transpile-only -r tsconfig-paths/register build/index.js",
@@ -10,7 +10,8 @@
     "lint": "eslint . --ext .ts",
     "lint-and-fix": "eslint . --ext .ts --fix",
     "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write",
-    "test": "env-cmd -f test.env jest --watch --runInBand"
+    "test": "env-cmd -f test.env jest --watch --runInBand",
+    "typeorm": "env-cmd -f dev.env ts-node --files -r tsconfig-paths/register ./node_modules/typeorm/cli.js --config src/config/ormconfig.ts"
   },
   "dependencies": {
     "env-cmd": "^10.1.0",
